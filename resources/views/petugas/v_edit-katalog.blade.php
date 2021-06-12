@@ -1,5 +1,5 @@
 @extends('layouts.v_template')
-@section('title', 'Entri Katalog')
+@section('title', 'Edit Katalog')
 @section('content')
 <section class="content-header">
   <div class="container-fluid">

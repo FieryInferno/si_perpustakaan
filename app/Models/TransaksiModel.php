@@ -18,7 +18,10 @@ class TransaksiModel extends Model
     public function detailData($id)
     {
         return DB::table('transaksi_koleksi')->join('v_koleksi_katalog', 'v_koleksi_katalog.id_buku', '=', 'transaksi_koleksi.id_buku')
-            ->where('kd_anggota', $id)->get(['v_koleksi_katalog.*', 'transaksi_koleksi.*']);
+            ->where([
+              'kd_anggota'    => $id,
+              'status_pinjam' => 'pinjam'
+            ])->get(['v_koleksi_katalog.*', 'transaksi_koleksi.*']);
     }
     public function detailDataHistori($id)
     {

@@ -18,24 +18,24 @@
         <div class="card-body">
           <div class="col-md-12">
             <form action="{{url('temp-pengembalian')}}" id="" method="GET">
-                @csrf
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label text-md-right">Kode Buku</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="id_buku" value="{{ old('id_buku') }}" autofocus>
-                        <div class="text-danger">
-                            @error('id_buku')
-                            {{ $message }}
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                @include('sweetalert::alert')
-                <div class="form-group row">
-                    <div class="col-md-8 text-md-right">
-                        <button type="submit" class="btn btn-primary">Cari</button>
-                    </div>
-                </div>
+              @csrf
+              <div class="form-group row">
+                  <label class="col-md-2 col-form-label text-md-right">Kode Buku</label>
+                  <div class="col-md-6">
+                      <input type="text" class="form-control" name="id_buku" value="{{ old('id_buku') }}" autofocus>
+                      <div class="text-danger">
+                          @error('id_buku')
+                          {{ $message }}
+                          @enderror
+                      </div>
+                  </div>
+              </div>
+              @include('sweetalert::alert')
+              <div class="form-group row">
+                  <div class="col-md-8 text-md-right">
+                      <button type="submit" class="btn btn-primary">Cari</button>
+                  </div>
+              </div>
             </form>
           </div>
         </div>
