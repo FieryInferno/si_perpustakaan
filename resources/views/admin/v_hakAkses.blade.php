@@ -241,4 +241,4 @@
         });
     });
 </script>
-@endsectio
+@endsection
