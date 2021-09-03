@@ -77,13 +77,11 @@ class PengembalianController extends Controller
         $count = $this->TransaksiModel->where('tinyint', '0')->count();
         // dd($count);
         if ($count > 0) {
-            $data = ['tinyint' => '1', 'tgl_kembali' => now()];
-            $this->TransaksiModel->tinyint($data);
-
-
-            return redirect()->back()->with('success', 'Data buku telah disimpan!!!');
+          $data = ['tinyint' => '1', 'tgl_kembali' => now()];
+          $this->TransaksiModel->tinyint($data);
+          return redirect('entri-pengembalian')->with('success', 'Data buku telah disimpan!!!');
         } else {
-            return redirect()->back()->with('warning', 'Silakan Input Buku Yang akan dipinjam!!!');
+          return redirect('entri-pengembalian')->with('warning', 'Silakan Input Buku Yang akan dipinjam!!!');
         }
     }
 
@@ -95,13 +93,13 @@ class PengembalianController extends Controller
         // dd($data);
         return view('petugas.v_pelanggaran', $data);
     }
+
     public function pelanggaran($id)
     {
-        $data = [
-            'pelanggaran' => $this->TransaksiModel->where('no_transaksi', $id)->first(),
-        ];
-        return view('petugas.v_entri-pelanggaran', $data);
+      $data = ['pelanggaran' => $this->TransaksiModel->join('v_koleksi_katalog', 'transaksi_koleksi.id_buku', '=', 'v_koleksi_katalog.id_buku')->where('no', $id)->first()];
+      return view('petugas.v_entri-pelanggaran', $data);
     }
+
     public function simpanPelanggaran()
     {
         $data = [
