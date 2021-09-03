@@ -153,16 +153,17 @@ class AnggotaController extends Controller
 
         return redirect()->route('data-anggota')->with('success', 'Data Berhasil diubah!');
     }
+
     public function hapus($id)
     {
-        //hapus file gambar
+      //hapus file gambar
 
-        $anggota = $this->AnggotaModel->detailData($id);
-        if ($anggota->gambar <> "") {
-            unlink(public_path('img/img-anggota') . '/' . $anggota->gambar);
-        }
-        $this->AnggotaModel->hapus($id);
-        return redirect()->route('data-anggota')->with('success', 'Data Berhasil dihapus!');
+      $anggota = $this->AnggotaModel->detailData($id);
+      if ($anggota->gambar <> "") {
+        unlink(public_path('img/img-anggota') . '/' . $anggota->gambar);
+      }
+      $this->AnggotaModel->hapus($id);
+      return redirect()->route('data-anggota')->with('success', 'Data Berhasil dihapus!');
     }
 
     public function kartu($id)
