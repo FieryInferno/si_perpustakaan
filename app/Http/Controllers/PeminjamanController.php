@@ -22,9 +22,7 @@ class PeminjamanController extends Controller
 
   public function index()
   {
-    $data = [
-      'pinjam' => $this->TransaksiModel->detailPeminjaman()
-    ];
+    $data['pinjam'] = $this->TransaksiModel->detailPeminjaman();
     return view('petugas.v_peminjaman', $data);
   }
 
@@ -83,62 +81,62 @@ class PeminjamanController extends Controller
     );
 
     if ($bahan->id_bahan == 1 && $bahan->id_bahan == 2) {
-      $now = date('Y-m-d');
+      $now    = date('Y-m-d');
       $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
-      $data = [
-          'kd_anggota' => Request()->kd_anggota,
-          'id_buku' => Request()->id_buku,
-          'tgl_pinjam' => $now,
-          'jatuh_tempo' => null,
+      $data   = [
+        'kd_anggota' => Request()->kd_anggota,
+        'id_buku' => Request()->id_buku,
+        'tgl_pinjam' => $now,
+        'jatuh_tempo' => null,
       ];
       $this->TempPinjamModel->simpan($data);
       return redirect()->back();
     } else {
-        $now = date('Y-m-d');
-        $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
-        $data = [
-            'kd_anggota' => Request()->kd_anggota,
-            'id_buku' => Request()->id_buku,
-            'tgl_pinjam' => $now,
-            'jatuh_tempo' => $addDay,
-        ];
-        $this->TempPinjamModel->simpan($data);
-        return redirect()->back();
+      $now    = date('Y-m-d');
+      $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
+      $data   = [
+        'kd_anggota' => Request()->kd_anggota,
+        'id_buku' => Request()->id_buku,
+        'tgl_pinjam' => $now,
+        'jatuh_tempo' => $addDay,
+      ];
+      $this->TempPinjamModel->simpan($data);
+      return redirect()->back();
     }
   }
 
-    public function hapus($id)
-    {
-        $this->TempPinjamModel->hapus($id);
-        return redirect()->back();
-    }
+  public function hapus($id)
+  {
+    $this->TempPinjamModel->hapus($id);
+    return redirect()->back();
+  }
 
-    public function simpan(Request $request)
-    {
-        $count = DB::table('temp_peminjaman')->where('kd_anggota', Request()->kd_anggota)->count();
-        if ($count > 0) {
-            foreach ($request->id_buku as $i => $id_buku) {
-                $thn = date('Y');
-                $genId = (new Helper)->InvoiceGenerator(new TransaksiModel, 'no_transaksi', 8, $thn);
-                $data[1] = [ // array dimulai dari index ke-1
-                    'id_buku' =>  $request->id_buku[$i],
-                    'no_transaksi' => $genId,
-                    'kd_anggota' => $request->kd_anggota[$i],
-                    'tgl_pinjam' => $request->tgl_pinjam[$i],
-                    'jatuh_tempo' => $request->jatuh_tempo[$i],
+  public function simpan(Request $request)
+  {
+    $count = DB::table('temp_peminjaman')->where('kd_anggota', Request()->kd_anggota)->count();
+    if ($count > 0) {
+      foreach ($request->id_buku as $i => $id_buku) {
+        $thn      = date('Y');
+        $genId    = (new Helper)->InvoiceGenerator(new TransaksiModel, 'no_transaksi', 8, $thn);
+        $data[1]  = [ // array dimulai dari index ke-1
+          'id_buku'       => $request->id_buku[$i],
+          'no_transaksi'  => $genId,
+          'kd_anggota'    => $request->kd_anggota[$i],
+          'tgl_pinjam'    => $request->tgl_pinjam[$i],
+          'jatuh_tempo'   => $request->jatuh_tempo[$i],
+          'status_pinjam' => 'Pinjam'
+        ];
+        TransaksiModel::insert($data);
 
-                ];
-                TransaksiModel::insert($data);
+        $id_buku = Request()->id_buku[$i];
+        $this->KoleksiModel->ket($id_buku);
+        $this->KoleksiModel->where('id_buku', $id_buku)->update(['ketersediaan' => 'Dipinjam']);
+        $this->TempPinjamModel->hapus($id_buku);
+      }
 
-                $id_buku = Request()->id_buku[$i];
-                $this->KoleksiModel->ket($id_buku);
-                $this->KoleksiModel->where('id_buku', $id_buku)->update(['ketersediaan' => 'Dipinjam']);
-                $this->TempPinjamModel->hapus($id_buku);
-            }
-
-            return redirect()->back()->with('success', 'Data buku telah disimpan!!!');
-        } else {
-            return redirect()->back()->with('warning', 'Silakan Input Buku Yang akan dipinjam!!!');
-        }
-    }
+      return redirect()->back()->with('success', 'Data buku telah disimpan!!!');
+  } else {
+    return redirect()->back()->with('warning', 'Silakan Input Buku Yang akan dipinjam!!!');
+  }
+}
 }

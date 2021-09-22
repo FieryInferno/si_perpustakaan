@@ -78,7 +78,7 @@
                       echo ' <td>' . $pinjam->no_transaksi . '</td>';
                       echo ' <td>' . $pinjam->id_buku . '</td>';
                       echo ' <td>' . $pinjam->judul_utama . '</td>';
-                      echo ' <td>' . $pinjam->tgl_pinjam . '</td>';
+                      echo ' <td>' . tgl_indo($pinjam->tgl_pinjam) . '</td>';
                       echo ' <td>' . $pinjam->jatuh_tempo . '</td>';
                       echo ' <td> - </td>';
                       echo '<td> - </td>';
@@ -92,8 +92,8 @@
                       echo ' <td>' . $pinjam->no_transaksi . '</td>';
                       echo ' <td>' . $pinjam->id_buku . '</td>';
                       echo ' <td>' . $pinjam->judul_utama . '</td>';
-                      echo ' <td>' . $pinjam->tgl_pinjam . '</td>';
-                      echo ' <td>' . $pinjam->jatuh_tempo . '</td>';
+                      echo ' <td>' . tgl_indo($pinjam->tgl_pinjam) . '</td>';
+                      echo ' <td>' . tgl_indo($pinjam->jatuh_tempo) . '</td>';
 
                       if ($hari > 3) {
                         echo ' <td> ' . $cal . ' Hari</td>';
