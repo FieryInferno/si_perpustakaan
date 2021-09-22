@@ -48,7 +48,7 @@ class PeminjamanController extends Controller
     }
     $data = [
       'anggota' => $this->AnggotaModel->detailData($id),
-      'pinjam' => $this->TransaksiModel->detailData($id),
+      'pinjam'  => $this->TransaksiModel->detailData($id),
       'histori' => $this->TransaksiModel->detailDataHistori($id),
       'koleksi' => $this->TempPinjamModel->detailData($id),
     ];
@@ -63,8 +63,7 @@ class PeminjamanController extends Controller
       ->where('akses', 'Dapat dipinjam')->first(); // cek apakah buku dapat dipinjam
     $pinjam = DB::table('transaksi_koleksi')->where('kd_anggota', Request()->kd_anggota)
       ->where('status_pinjam', 'Pinjam')->first(); // cek apakah anggota sudah mengembalikan buku
-    $bahan = DB::table('v_koleksi_katalog')->where('id_buku', Request()->id_buku)
-      ->where('id_bahan', '1')->orwhere('id_bahan', '2')->first(); // cek jika buku merupakan buku pelajaran
+    $bahan = DB::table('v_koleksi_katalog')->where('id_buku', '0003')->first();
     if (!$dipinjam) {
       return redirect()->back()->with('warning', 'Buku belum dikembalikan atau sedang dipinjam');
     } else if (!$baca) {
@@ -83,7 +82,7 @@ class PeminjamanController extends Controller
       ]
     );
 
-    if ($bahan) {
+    if ($bahan->id_bahan == 1 && $bahan->id_bahan == 2) {
       $now = date('Y-m-d');
       $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
       $data = [

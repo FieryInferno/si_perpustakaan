@@ -14,10 +14,10 @@ class PengembalianController extends Controller
 {
   public function __construct()
   {
-    $this->AnggotaModel = new AnggotaModel();
-    $this->KoleksiModel = new KoleksiModel();
-    $this->TempPinjamModel = new TempPinjamModel();
-    $this->TransaksiModel = new TransaksiModel();
+    $this->AnggotaModel     = new AnggotaModel();
+    $this->KoleksiModel     = new KoleksiModel();
+    $this->TempPinjamModel  = new TempPinjamModel();
+    $this->TransaksiModel   = new TransaksiModel();
     $this->TempKembaliModel = new TempKembaliModel();
   }
 
@@ -59,46 +59,45 @@ class PengembalianController extends Controller
     return redirect()->back();
   }
 
-    public function hapus($id)
-    {
-        $data = [
+  public function hapus($id)
+  {
+    $data = [
+      'status_pinjam' => 'Pinjam',
+      'tgl_kembali' => null,
+      'tinyint' => null,
+    ];
+    $this->TransaksiModel->batal($id, $data);
+    $this->KoleksiModel->where('id_buku', $id)->update(['ketersediaan' => 'Dipinjam']);
+    return redirect()->back();
+  }
 
-            'status_pinjam' => 'Pinjam',
-            'tgl_kembali' => null,
-            'tinyint' => null,
-        ];
-        $this->TransaksiModel->batal($id, $data);
-        $this->KoleksiModel->where('id_buku', $id)->update(['ketersediaan' => 'Dipinjam']);
-        return redirect()->back();
+  public function simpan(Request $request)
+  {
+    $count = $this->TransaksiModel->where('tinyint', '0')->count();
+    // dd($count);
+    if ($count > 0) {
+      $data = ['tinyint' => '1', 'tgl_kembali' => now()];
+      $this->TransaksiModel->tinyint($data);
+      return redirect('entri-pengembalian')->with('success', 'Data buku telah disimpan!!!');
+    } else {
+      return redirect('entri-pengembalian')->with('warning', 'Silakan Input Buku Yang akan dipinjam!!!');
     }
+  }
 
-    public function simpan(Request $request)
-    {
-        $count = $this->TransaksiModel->where('tinyint', '0')->count();
-        // dd($count);
-        if ($count > 0) {
-          $data = ['tinyint' => '1', 'tgl_kembali' => now()];
-          $this->TransaksiModel->tinyint($data);
-          return redirect('entri-pengembalian')->with('success', 'Data buku telah disimpan!!!');
-        } else {
-          return redirect('entri-pengembalian')->with('warning', 'Silakan Input Buku Yang akan dipinjam!!!');
-        }
-    }
+  public function dataPelanggaran()
+  {
+    $data = [
+      'pelanggaran' => DB::table('v_transaksi')->join('pelanggaran', 'pelanggaran.no_transaksi', '=', 'v_transaksi.no_transaksi')->get()
+    ];
+    return view('petugas.v_pelanggaran', $data);
+  }
 
-    public function dataPelanggaran()
-    {
-        $data = [
-            'pelanggaran' => DB::table('v_transaksi')->join('pelanggaran', 'pelanggaran.no_transaksi', '=', 'v_transaksi.no_transaksi')->get()
-        ];
-        // dd($data);
-        return view('petugas.v_pelanggaran', $data);
-    }
-
-    public function pelanggaran($id)
-    {
-      $data = ['pelanggaran' => $this->TransaksiModel->join('v_koleksi_katalog', 'transaksi_koleksi.id_buku', '=', 'v_koleksi_katalog.id_buku')->where('no', $id)->first()];
-      return view('petugas.v_entri-pelanggaran', $data);
-    }
+  public function pelanggaran($id)
+  {
+    $data = ['pelanggaran' => $this->TransaksiModel->join('v_koleksi_katalog', 'transaksi_koleksi.id_buku', '=', 'v_koleksi_katalog.id_buku')->where('no', $id)->first()];
+    // dd($data);
+    return view('petugas.v_entri-pelanggaran', $data);
+  }
 
     public function simpanPelanggaran()
     {

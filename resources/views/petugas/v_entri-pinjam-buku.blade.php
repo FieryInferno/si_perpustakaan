@@ -60,72 +60,72 @@
                             <div class="card text-white bg-primary mb-3 mt-5">
                               <div class="card-body">
                                 <form action="{{url('pilih-buku')}}" id="formtambah" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group row">
-                                        <div class="text-danger col-2 col-md-6 col-form-label">
-                                            @error('id_buku')
-                                            <script>
-                                                $(function() {
-                                                    $(document).Toasts('create', {
-                                                        class: 'bg-maroon',
-                                                        autohide: true,
-                                                        delay: 5000,
-                                                        title: 'Pesan!',
-                                                        position: 'bottomRight',
-                                                        icon: 'fas fa-exclamation fa-lg',
-                                                        body: '{{ $message }}'
-                                                    })
-                                                });
-                                            </script>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-3 col-form-label text-md-right">ID Buku/Barcode</label>
-                                        <div class="col-md-6">
-                                            <div class="input-group mb-3">
-                                                <input type="text" name="kd_anggota" value="{{ $anggota->kd_anggota }}" hidden>
-                                                <input type="text" class="form-control @error('id_buku') is-invalid @enderror" name="id_buku" placeholder="Masukkan ID Buku" autocomplete="id_buku" autofocus>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-warning" style="color:white;" type="submit">Ok</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                  @csrf
+                                  <div class="form-group row">
+                                      <div class="text-danger col-2 col-md-6 col-form-label">
+                                          @error('id_buku')
+                                          <script>
+                                              $(function() {
+                                                  $(document).Toasts('create', {
+                                                      class: 'bg-maroon',
+                                                      autohide: true,
+                                                      delay: 5000,
+                                                      title: 'Pesan!',
+                                                      position: 'bottomRight',
+                                                      icon: 'fas fa-exclamation fa-lg',
+                                                      body: '{{ $message }}'
+                                                  })
+                                              });
+                                          </script>
+                                          @enderror
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <label class="col-md-3 col-form-label text-md-right">ID Buku/Barcode</label>
+                                      <div class="col-md-6">
+                                          <div class="input-group mb-3">
+                                              <input type="text" name="kd_anggota" value="{{ $anggota->kd_anggota }}" hidden>
+                                              <input type="text" class="form-control @error('id_buku') is-invalid @enderror" name="id_buku" placeholder="Masukkan ID Buku" autocomplete="id_buku" autofocus>
+                                              <div class="input-group-append">
+                                                  <button class="btn btn-warning" style="color:white;" type="submit">Ok</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
                                 </form>
                               </div>
                             </div>
                           </div>
-                            <div class="col-sm-6">
-                                <label for="">Daftar Buku</label>
+                          <div class="col-sm-6">
+                            <label for="">Daftar Buku</label>
                             </div>
                             <table class="table" id="bukuTable">
-                                <thead>
+                              <thead>
+                                <tr>
+                                  <th scope="col">No.</th>
+                                  <th scope="col">Barcode</th>
+                                  <th scope="col">Judul Utama</th>
+                                  <th scope="col">Tgl.pinjam</th>
+                                  <th scope="col">Tgl.Jatuh Tempo</th>
+                                  <th scope="col">Aksi</th>
+                                </tr>
+                              </thead>
+                              <form action="{{ route('transaksi-pinjam') }}" method="POST">
+                                @csrf
+                                <?php $no = 1; ?>
+                                @forelse ($koleksi as $koleksi)
+                                  <tbody>
                                     <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Barcode</th>
-                                        <th scope="col">Judul Utama</th>
-                                        <th scope="col">Tgl.pinjam</th>
-                                        <th scope="col">Tgl.Jatuh Tempo</th>
-                                        <th scope="col">Aksi</th>
+                                      <td>{{ $no++}}</td>
+                                      <td>{{ $koleksi->id_buku}} <input type="text" name="id_buku[]" value="{{ $koleksi->id_buku }}" hidden></td>
+                                      <td>{{ $koleksi->judul_utama }}</td>
+                                      <td>{{ tgl_indo($koleksi->tgl_pinjam) }}<input type="text" name="tgl_pinjam[]" value="{{ $koleksi->tgl_pinjam }}" hidden></td>
+                                      <td><?= ($koleksi->jatuh_tempo == null) ? '2 Semester' : tgl_indo($koleksi->jatuh_tempo) ?><input type="text" name="jatuh_tempo[]" value="{{ $koleksi->jatuh_tempo }}" hidden></td>
+                                      <td><a href="{{ url('hapus-temp')}}/{{$koleksi->id_buku}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                      </td>
+                                      <td><input type="text" name="kd_anggota[]" value="{{ $anggota->kd_anggota }}" hidden>
+                                      </td>
                                     </tr>
-                                </thead>
-                                <form action="{{ route('transaksi-pinjam') }}" method="POST">
-                                    @csrf
-                                    <?php $no = 1; ?>
-                                    @forelse ($koleksi as $koleksi)
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $no++}}</td>
-                                            <td>{{ $koleksi->id_buku}} <input type="text" name="id_buku[]" value="{{ $koleksi->id_buku }}" hidden></td>
-                                            <td>{{ $koleksi->judul_utama }}</td>
-                                            <td>{{ $koleksi->tgl_pinjam }}<input type="text" name="tgl_pinjam[]" value="{{ $koleksi->tgl_pinjam }}" hidden></td>
-                                            <td><?= ($koleksi->jatuh_tempo == null) ? '2 Semester' : $koleksi->jatuh_tempo ?><input type="text" name="jatuh_tempo[]" value="{{ $koleksi->jatuh_tempo }}" hidden></td>
-                                            <td><a href="{{ url('hapus-temp')}}/{{$koleksi->id_buku}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                            </td>
-                                            <td><input type="text" name="kd_anggota[]" value="{{ $anggota->kd_anggota }}" hidden>
-                                            </td>
-                                        </tr>
                                         @empty
                                         <tr>
                                             <td colspan="7" class="text-md-center"><strong>Tidak ada buku yang dipilih! <br> Silakan input buku</strong></td>

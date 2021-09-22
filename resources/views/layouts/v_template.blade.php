@@ -130,18 +130,19 @@
     <script src="{{ asset('template')}}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ asset('template')}}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('template')}}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <?php
-      $url  = explode('/', url()->current());
-      if (strpos($url[3], 'dashboard') !== FALSE) { ?>
-        <script>
-            $(document).ready(function() {
-                $("#userstable").DataTable()
-            })
-
-            var ticksStyle = {
-              fontColor: '#495057',
-              fontStyle: 'bold'
-            }
+    <script>
+      $(document).ready(function() {
+        $("#userstable").DataTable()
+      })
+      
+      <?php
+        $url  = explode('/', url()->current());
+        if (strpos($url[3], 'dashboard') !== FALSE) { ?>
+          var ticksStyle = {
+            fontColor: '#495057',
+            fontStyle: 'bold'
+          }
+          
           var mode = 'index'
           var intersect = true
           var $salesChart = $('#sales-chart')
@@ -211,9 +212,9 @@
               }
             }
           })
-        </script>
-      <?php }
-    ?>
+        <?php }
+      ?>
+    </script>
 </body>
 
 </html>
