@@ -7,37 +7,46 @@ use App\Models\PencarianModel;
 use App\Models\EksemplarModel;
 use Illuminate\Support\Facades\DB;
 use App\Models\AnggotaModel;
+use App\Models\KatalogModel;
+use App\Models\KoleksiModel;
 use Carbon\Carbon;
 
 class PencarianController extends Controller
 {
-    public function __construct()
-    {
-        $this->PencarianModel = new PencarianModel();
-        $this->EksemplarModel = new EksemplarModel();
-        $this->AnggotaModel = new AnggotaModel();
+  public function __construct()
+  {
+    $this->PencarianModel = new PencarianModel();
+    $this->EksemplarModel = new EksemplarModel();
+    $this->AnggotaModel   = new AnggotaModel();
+    $this->katalog        = new KatalogModel();
+    $this->koleksi        = new KoleksiModel();
+  }
+
+  public function index()
+  {
+    //pencarian
+    if (request()->has('keyword') && trim(request()->keyword)) {
+      $data = [
+        'kategori' => PencarianModel::select("*")->get()->toArray(),
+        'buku' => $this->EksemplarModel->pencarian(request()->keyword, request()->kategori)
+      ];
+      return view('searchbar', $data);
+    } else {
+      $buku = $this->katalog->groupBy('katalog.bib_id')->join('koleksi', 'katalog.bib_id', '=', 'koleksi.bib_id')->paginate(5);
+      for ($i=0; $i < count($buku); $i++) {
+        $key                    = $buku[$i];
+        $koleksi                = $this->koleksi->where('bib_id', $key['bib_id'])->where('ketersediaan', 'Tersedia')->count();
+        $buku[$i]['eksemplar']  = $koleksi;
+      }
+      $data = [
+        'kategori'  => PencarianModel::select("*")->get()->toArray(),
+        'buku'      => $buku
+        // 'buku' => EksemplarModel::select("*")->paginate(2)
+      ];
+      return view('searchbar', $data);
     }
+  }
 
-    public function index()
-    {
-        //pencarian
-        if (request()->has('keyword') && trim(request()->keyword)) {
-            $data = [
-                'kategori' => PencarianModel::select("*")->get()->toArray(),
-                'buku' => $this->EksemplarModel->pencarian(request()->keyword, request()->kategori)
-
-            ];
-            return view('searchbar', $data);
-        } else {
-            $data = [
-                'kategori' => PencarianModel::select("*")->get()->toArray(),
-                'buku' => EksemplarModel::paginate(5)
-                // 'buku' => EksemplarModel::select("*")->paginate(2)
-
-            ];
-            return view('searchbar', $data);
-        }
-    }
     public function pengunjung()
     {
         $mytime = Carbon::today();

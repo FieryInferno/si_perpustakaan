@@ -2,134 +2,133 @@
 @section('title', 'Entri Koleksi')
 @section('content')
 <section class="content-header">
-
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Entri Data Koleksi</h1>
-            </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Entri Data Koleksi</h1>
+      </div>
     </div>
+  </div>
 </section>
 
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card card-primary card-outline">
-                <div class="card-body">
-                    <div class="col-md-12">
-                        <form action="{{url('/simpan-koleksi')}}" id="formtambah" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">Judul Buku</label>
-                                <div class="col-md-6">
-                                    <select class="custom-select" name="bib_id">
-                                        <option value='' selected>Pilih</option>
-                                        @foreach( $katalog as $data)
-                                        <option value="{{$data->bib_id}}">{{$data->bib_id}} | {{$data->judul_utama}} | {{$data->bahan}}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="text-danger">
-                                        @error('jenis_sumber')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">ID Buku</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="id_buku" value="{{ old('id_buku') }}" autocomplete="id_buku" autofocus>
-                                    <div class="text-danger">
-                                        @error('id_buku')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">Tanggal Pengadaan</label>
-                                <div class="col-md-6">
-                                    <input class="form-control" type="date" id="tgl_pengadaan" name="tgl_pengadaan" />
-                                    <div class="text-danger">
-                                        @error('tgl_pengadaan')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">Jenis Sumber</label>
-                                <div class="col-md-6">
-                                    <select class="custom-select" name="jenis_sumber">
-                                        <option value='' selected>Pilih</option>
-                                        <option value="Pembelian">Pembelian</option>
-                                        <option value="Hadiah/Hibah">Hadiah/Hibah</option>
-                                        <option value="Penggantian">Penggantian</option>
-                                        <option value="Pengadaan">Pengadaan</option>
-                                    </select>
-                                    <div class="text-danger">
-                                        @error('jenis_sumber')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">Nama Sumber</label>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="nama_sumber" value="{{ old('nama_sumber') }}" autocomplete="nama_sumber" autofocus>
-                                    <div class="text-danger">
-                                        @error('nama_sumber')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">Akses</label>
-                                <div class="col-md-6">
-                                    <select class="custom-select" name="akses">
-                                        <option value='' selected>Pilih</option>
-                                        <option value="Dapat dipinjam">Dapat dipinjam</option>
-                                        <option value="Baca ditempat">Baca ditempat</option>
-                                        <option value="Referensi">Referensi</option>
-                                    </select>
-                                    <div class="text-danger">
-                                        @error('akses')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-md-2 col-form-label text-md-right">Ketersediaan</label>
-                                <div class="col-md-6">
-                                    <select class="custom-select" name="ketersediaan">
-                                        <option value='' selected>Pilih</option>
-                                        <option value="Tersedia">Tersedia</option>
-                                        <option value="Rusak">Rusak</option>
-                                        <option value="Dipinjam">Dipinjam</option>
-                                        <option value="Dalam Pengadaan">Dalam Pengadaan</option>
-                                    </select>
-                                    <div class="text-danger">
-                                        @error('ketersediaan')
-                                        {{ $message }}
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-8 text-md-right">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </div>
-                            </div>
-                        </form>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-body">
+          <div class="col-md-12">
+            <form action="{{url('/simpan-koleksi')}}" id="formtambah" method="POST" enctype="multipart/form-data">
+              @csrf
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">Judul Buku</label>
+                <div class="col-md-6">
+                  <select class="custom-select" name="bib_id">
+                    <option value='' selected>Pilih</option>
+                    @foreach( $katalog as $data)
+                      <option value="{{$data->bib_id}}">{{$data->bib_id}} | {{$data->judul_utama}} | {{$data->bahan}}</option>
+                    @endforeach
+                  </select>
+                  <div class="text-danger">
+                    @error('jenis_sumber')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">ID Buku</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="id_buku" value="{{ old('id_buku') }}" autocomplete="id_buku" autofocus>
+                  <div class="text-danger">
+                    @error('id_buku')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">Tanggal Pengadaan</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="date" id="tgl_pengadaan" name="tgl_pengadaan" />
+                  <div class="text-danger">
+                    @error('tgl_pengadaan')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">Jenis Sumber</label>
+                <div class="col-md-6">
+                  <select class="custom-select" name="jenis_sumber">
+                    <option value='' selected>Pilih</option>
+                    <option value="Pembelian">Pembelian</option>
+                    <option value="Hadiah/Hibah">Hadiah/Hibah</option>
+                    <option value="Penggantian">Penggantian</option>
+                    <option value="Pengadaan">Pengadaan</option>
+                  </select>
+                  <div class="text-danger">
+                    @error('jenis_sumber')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">Nama Sumber</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" name="nama_sumber" value="{{ old('nama_sumber') }}" autocomplete="nama_sumber" autofocus>
+                  <div class="text-danger">
+                    @error('nama_sumber')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">Akses</label>
+                <div class="col-md-6">
+                  <select class="custom-select" name="akses">
+                    <option value='' selected>Pilih</option>
+                    <option value="Dapat dipinjam">Dapat dipinjam</option>
+                    <option value="Baca ditempat">Baca ditempat</option>
+                    <option value="Referensi">Referensi</option>
+                  </select>
+                  <div class="text-danger">
+                    @error('akses')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label text-md-right">Ketersediaan</label>
+                <div class="col-md-6">
+                  <select class="custom-select" name="ketersediaan">
+                    <option value='' selected>Pilih</option>
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Rusak">Rusak</option>
+                    <option value="Dipinjam">Dipinjam</option>
+                    <option value="Dalam Pengadaan">Dalam Pengadaan</option>
+                  </select>
+                  <div class="text-danger">
+                    @error('ketersediaan')
+                      {{ $message }}
+                    @enderror
+                  </div>
+                </div>
+              </div>
+                <div class="form-group row">
+                    <div class="col-md-8 text-md-right">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
-            </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <script>
     $(document).ready(function() {
