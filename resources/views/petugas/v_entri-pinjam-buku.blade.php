@@ -214,32 +214,33 @@
                       </div>
                       <!-- History -->
                       <div class="tab-pane fade" id="custom-tabs-four-histori" role="tabpanel" aria-labelledby="custom-tabs-four-histori-tab">
-                          <label for="Koleksi">Daftar Histori Peminjaman - {{$anggota->kd_anggota}} | {{$anggota->nama_anggota}}</label>
-                          <table class="table">
-                              <thead>
-                                  <tr>
-                                      <th scope="col">No.</th>
-                                      <th scope="col">Barcode</th>
-                                      <th scope="col">Judul Utama</th>
-                                      <th scope="col">Tgl.Pinjam</th>
-                                      <th scope="col">Tgl.Dikembalikan</th>
-                                  </tr>
-                              </thead>
-                              <?php $no = 1; ?>
-                              @forelse ($histori as $histori)
-
-                              <td>{{ $no++}}</td>
-                              <td>{{ $histori->id_buku}}</td>
-                              <td>{{ $histori->judul_utama }}</td>
-                              <td>{{ $histori->tgl_pinjam }}</td>
-                              <td>{{ $histori->jatuh_tempo }}</td>
+                        <label for="Koleksi">Daftar Histori Peminjaman - {{$anggota->kd_anggota}} | {{$anggota->nama_anggota}}</label>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">No.</th>
+                              <th scope="col">Barcode</th>
+                              <th scope="col">Judul Utama</th>
+                              <th scope="col">Tgl.Pinjam</th>
+                              <th scope="col">Tgl.Dikembalikan</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php $no = 1; ?>
+                            @forelse ($histori as $histori)
+                              <tr>
+                                <td>{{ $no++}}</td>
+                                <td>{{ $histori->id_buku}}</td>
+                                <td>{{ $histori->judul_utama }}</td>
+                                <td>{{ tgl_indo($histori->tgl_pinjam) }}</td>
+                                <td>{{ tgl_indo($histori->jatuh_tempo) }}</td>
                               </tr>
-
                               @empty
                               <div class="col-sm-12 text-md-center">
-                                  <strong>Belum ada Buku yang diPinjam</strong>
+                                <strong>Belum ada Buku yang diPinjam</strong>
                               </div>
-                              @endforelse
+                            @endforelse
+                          </tbody>
                           </table>
                       </div>
                     </div>
