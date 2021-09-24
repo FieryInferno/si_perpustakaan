@@ -12,7 +12,6 @@ class ViewKoleksiModel extends Model
 
     public function detailData($id)
     {
-
-        return $this->select('*')->where('id_buku', $id)->get();
+      return $this->select('*')->where('bib_id', $id)->get();
     }
 }

@@ -46,8 +46,8 @@ class KatalogController extends Controller
     }
     $data = [
       'katalog' => $this->KatalogModel->detailData($id),
-      'bahasa' => $this->KatalogModel->bahasa(),
-      'karya' => $this->KatalogModel->jenisKarya(),
+      'bahasa'  => $this->KatalogModel->bahasa(),
+      'karya'   => $this->KatalogModel->jenisKarya(),
       'koleksi' => $this->ViewKoleksiModel->detailData($id)
     ];
     return view('petugas.v_edit-katalog', $data);
