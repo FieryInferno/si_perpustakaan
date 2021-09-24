@@ -8,28 +8,29 @@ use Illuminate\Support\Facades\DB;
 
 class AnggotaController extends Controller
 {
-    public function __construct()
-    {
-        $this->AnggotaModel = new AnggotaModel();
-    }
-    public function index()
-    {
-        // View Hak Akses dan parsing data
-        $users = DB::table('anggota')->get();
+  public function __construct()
+  {
+    $this->AnggotaModel = new AnggotaModel();
+  }
 
-        return view('petugas.v_anggota', ['users' => $users]);
-    }
+  public function index()
+  {
+    // View Hak Akses dan parsing data
+    $users = DB::table('anggota')->get();
 
-    public function detailAnggota($id)
-    {
-        # code...
-        return DB::table('anggota')->where('id', $id)->first();
-    }
-    public function entriAnggota()
-    {
-        # code...
-        return view('petugas.v_entri-anggota');
-    }
+    return view('petugas.v_anggota', ['users' => $users]);
+  }
+
+  public function detailAnggota($id)
+  {
+    return DB::table('anggota')->where('id', $id)->first();
+  }
+
+  public function entriAnggota()
+  {
+    return view('petugas.v_entri-anggota');
+  }
+
     public function editAnggota($id)
     {
         if (!$this->AnggotaModel->detailData($id)) {
@@ -42,49 +43,49 @@ class AnggotaController extends Controller
     }
     public function simpan()
     {
-        //form validasi
-        Request()->validate(
-            [
-                'kd_anggota' => 'required|unique:anggota,kd_anggota|max:10',
-                'no_identitas' => 'required|unique:anggota,no_identitas',
-                'nama_anggota' => 'required',
-                'tempat_lahir' => 'required',
-                'tgl_lahir' => 'required',
-                'jkelamin' => 'required',
-                'gambar' => 'required|mimes:jpeg,png,jpg|max:2024000',
-            ],
-            [
-                'kd_anggota.required' => 'Wajib diisi!',
-                'kd_anggota.unique' => 'Nomor Anggota ini Sudah Ada!',
-                'kd_anggota.max' => 'Nomor Anggota maksimal 10 karakter!',
-                'no_identitas.required' => 'Wajib diisi!',
-                'no_identitas.unique' => 'No.Identitas ini Sudah Terdaftar!',
-                'nama_anggota.required' => 'Wajib diisi!',
-                'tempat_lahir.required' => 'Wajib diisi!',
-                'tgl_lahir.required' => 'Wajib diisi!',
-                'jkelamin.required' => 'Wajib diisi!',
-                'gambar.required' => 'Wajib diisi!',
-                'gambar.mimes' => 'Format gambar tidak sesuai (png,jpg,jpeg)',
-                'gambar.max' => 'Ukuran maksimal 1024 MB',
-            ]
-        );
+      //form validasi
+      Request()->validate(
+          [
+              'kd_anggota' => 'required|unique:anggota,kd_anggota|max:10',
+              'no_identitas' => 'required|unique:anggota,no_identitas',
+              'nama_anggota' => 'required',
+              'tempat_lahir' => 'required',
+              'tgl_lahir' => 'required',
+              'jkelamin' => 'required',
+              'gambar' => 'required|mimes:jpeg,png,jpg|max:2024000',
+          ],
+          [
+              'kd_anggota.required' => 'Wajib diisi!',
+              'kd_anggota.unique' => 'Nomor Anggota ini Sudah Ada!',
+              'kd_anggota.max' => 'Nomor Anggota maksimal 10 karakter!',
+              'no_identitas.required' => 'Wajib diisi!',
+              'no_identitas.unique' => 'No.Identitas ini Sudah Terdaftar!',
+              'nama_anggota.required' => 'Wajib diisi!',
+              'tempat_lahir.required' => 'Wajib diisi!',
+              'tgl_lahir.required' => 'Wajib diisi!',
+              'jkelamin.required' => 'Wajib diisi!',
+              'gambar.required' => 'Wajib diisi!',
+              'gambar.mimes' => 'Format gambar tidak sesuai (png,jpg,jpeg)',
+              'gambar.max' => 'Ukuran maksimal 1024 MB',
+          ]
+      );
 
-        //upload gambar
-        $file = Request()->gambar;
-        $filename = Request()->status . '-' . Request()->nama_anggota . '-' . Request()->no_identitas . '.' . $file->extension();
-        $file->move(public_path('img/img-anggota'), $filename);
+      //upload gambar
+      $file     = Request()->gambar;
+      $filename = Request()->status . '-' . Request()->nama_anggota . '-' . Request()->no_identitas . '.' . $file->extension();
+      $file->move(public_path('img/img-anggota'), $filename);
 
-        $data = [
-            'kd_anggota' => Request()->kd_anggota,
-            'no_identitas' => Request()->no_identitas,
-            'nama_anggota' => Request()->nama_anggota,
-            'status' => Request()->status,
-            'tempat_lahir' => Request()->tempat_lahir,
-            'tgl_lahir' => Request()->tgl_lahir,
-            'jkelamin' => Request()->jkelamin,
-            'gambar' => $filename,
-            // 'created_at' => date("Y-m-d H:i:s")
-        ];
+      $data = [
+        'kd_anggota'    => Request()->kd_anggota,
+        'no_identitas'  => Request()->no_identitas,
+        'nama_anggota'  => Request()->nama_anggota,
+        'status'        => Request()->status,
+        'tempat_lahir'  => Request()->tempat_lahir,
+        'tgl_lahir'     => Request()->tgl_lahir,
+        'jkelamin'      => Request()->jkelamin,
+        'gambar'        => $filename,
+        'created_at'    => date("Y-m-d H:i:s")
+      ];
 
         $this->AnggotaModel->simpan($data);
         return redirect()->route('data-anggota')->with('success', 'Data Berhasil ditambahkan!');
