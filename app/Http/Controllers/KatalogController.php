@@ -58,18 +58,18 @@ class KatalogController extends Controller
     //form validasi
     Request()->validate(
       [
-          // 'bib_id' => 'required|unique:katalog,bib_id',
-          'judul_utama'   => 'required',
-          'pengarang'     => 'required',
-          'tempat_terbit' => 'required',
-          'penerbit'      => 'required',
-          'thn_terbit'    => 'required',
-          'jumlah_hlm'    => 'required',
-          // 'dimensi' => 'required',
-          'kelas_ddc'     => 'required',
-          'no_panggil'    => 'required',
-          'isbn'          => 'required'
-          // 'gambar' => 'required|mimes:jpeg,png,jpg|max:2024000',
+        // 'bib_id' => 'required|unique:katalog,bib_id',
+        'judul_utama'   => 'required',
+        'pengarang'     => 'required',
+        'tempat_terbit' => 'required',
+        'penerbit'      => 'required',
+        'thn_terbit'    => 'required',
+        'jumlah_hlm'    => 'required',
+        // 'dimensi' => 'required',
+        'kelas_ddc'     => 'required',
+        'no_panggil'    => 'required',
+        'isbn'          => 'required'
+        // 'gambar' => 'required|mimes:jpeg,png,jpg|max:2024000',
       ],
       [
         // 'bib_id.required' => 'Wajib diisi!',
@@ -114,121 +114,124 @@ class KatalogController extends Controller
     return redirect()->route('katalog')->with('success', 'Data Berhasil ditambahkan!');
   }
 
-    public function simpanEdit($id)
-    {
-        //form validasi
-        Request()->validate(
-            [
-
-                'judul_utama' => 'required',
-                'pengarang' => 'required',
-                'tempat_terbit' => 'required',
-                'penerbit' => 'required',
-                'thn_terbit' => 'required',
-                'jumlah_hlm' => 'required',
-                // 'dimensi' => 'required',
-                'kelas_ddc' => 'required',
-                'no_panggil' => 'required',
-                'isbn' => 'required',
-                'sampul_depan' => 'mimes:jpeg,png,jpg|max:2024000',
-            ],
-            [
-
-                'judul_utama.required' => 'Wajib diisi!',
-                'pengarang.required' => 'Wajib diisi!',
-                'penerbit.required' => 'Wajib diisi!',
-                'tempat_terbit.required' => 'Wajib diisi!',
-                'penerbit.required' => 'Wajib diisi!',
-                'thn_terbit.required' => 'Wajib diisi!',
-                'jumlah_hlm.required' => 'Wajib diisi!',
-                'kelas_ddc.required' => 'Wajib diisi!',
-                'no_panggil.required' => 'Wajib diisi!',
-                'isbn.required' => 'Wajib diisi!',
-                'sampul_depan.mimes' => 'Format gambar tidak sesuai (png,jpg,jpeg)',
-                'sampul_depan.max' => 'Ukuran maksimal 1024 MB',
-            ]
-        );
+  public function simpanEdit($id)
+  {
+    //form validasi
+    Request()->validate(
+      [
+        'judul_utama' => 'required',
+        'pengarang' => 'required',
+        'tempat_terbit' => 'required',
+        'penerbit' => 'required',
+        'thn_terbit' => 'required',
+        'jumlah_hlm' => 'required',
+        // 'dimensi' => 'required',
+        'kelas_ddc' => 'required',
+        'no_panggil' => 'required',
+        'isbn' => 'required',
+        'sampul_depan' => 'mimes:jpeg,png,jpg|max:2024000',
+      ],
+      [
+        'judul_utama.required' => 'Wajib diisi!',
+        'pengarang.required' => 'Wajib diisi!',
+        'penerbit.required' => 'Wajib diisi!',
+        'tempat_terbit.required' => 'Wajib diisi!',
+        'penerbit.required' => 'Wajib diisi!',
+        'thn_terbit.required' => 'Wajib diisi!',
+        'jumlah_hlm.required' => 'Wajib diisi!',
+        'kelas_ddc.required' => 'Wajib diisi!',
+        'no_panggil.required' => 'Wajib diisi!',
+        'isbn.required' => 'Wajib diisi!',
+        'sampul_depan.mimes' => 'Format gambar tidak sesuai (png,jpg,jpeg)',
+        'sampul_depan.max' => 'Ukuran maksimal 1024 MB',
+      ]
+    );
 
 
-        //Jika ganti gambar
-        if (Request()->gambar <> "") {
-            //upload gambar
-            $file = Request()->gambar;
-            $filename = Request()->bib_id . '-' . Request()->judul_utama . '.' . $file->extension();
-            $file->move(public_path('img/img-katalog'), $filename);
+    //Jika ganti gambar
+    if (Request()->gambar <> "") {
+      //upload gambar
+      $file = Request()->gambar;
+      $filename = Request()->bib_id . '-' . Request()->judul_utama . '.' . $file->extension();
+      $file->move(public_path('img/img-katalog'), $filename);
 
-            $data = [
+      $data = [
+        'judul_utama'     => Request()->judul_utama,
+        'judul_sub'       => Request()->judul_sub,
+        'pengarang'       => Request()->pengarang,
+        'penerbit'        => Request()->penerbit,
+        'tempat_terbit'   => Request()->tempat_terbit,
+        'thn_terbit'      => Request()->thn_terbit,
+        'jumlah_hlm'      => Request()->jumlah_hlm,
+        'dimensi'         => Request()->dimensi,
+        'kelas_ddc'       => Request()->kelas_ddc,
+        'edisi'           => Request()->edisi,
+        'no_panggil'      => Request()->no_panggil,
+        'isbn'            => Request()->isbn,
+        'id_jenis_karya'  => Request()->jenis_karya,
+        'id_bahasa'       => Request()->jenis_karya,
+        'sampul_depan'    => $filename,
+        'updated_at'      => now()
+      ];
 
-                'judul_utama' => Request()->judul_utama,
-                'judul_sub' => Request()->judul_sub,
-                'pengarang' => Request()->pengarang,
-                'penerbit' => Request()->penerbit,
-                'tempat_terbit' => Request()->tempat_terbit,
-                'thn_terbit' => Request()->thn_terbit,
-                'jumlah_hlm' => Request()->jumlah_hlm,
-                'dimensi' => Request()->dimensi,
-                'kelas_ddc' => Request()->kelas_ddc,
-                'edisi' => Request()->edisi,
-                'no_panggil' => Request()->no_panggil,
-                'isbn' => Request()->isbn,
-                'id_jenis_karya' => Request()->jenis_karya,
-                'id_bahasa' => Request()->jenis_karya,
-                'sampul_depan' => $filename,
-                'updated_at' => now()
-            ];
-            $this->KatalogModel->edit($id, $data);
-        } else {
-            // Jika tidak ganti gambar
-            $data = [
-
-                'judul_utama' => Request()->judul_utama,
-                'judul_sub' => Request()->judul_sub,
-                'pengarang' => Request()->pengarang,
-                'penerbit' => Request()->penerbit,
-                'tempat_terbit' => Request()->tempat_terbit,
-                'thn_terbit' => Request()->thn_terbit,
-                'jumlah_hlm' => Request()->jumlah_hlm,
-                'dimensi' => Request()->dimensi,
-                'kelas_ddc' => Request()->kelas_ddc,
-                'edisi' => Request()->edisi,
-                'no_panggil' => Request()->no_panggil,
-                'isbn' => Request()->isbn,
-                'id_jenis_karya' => Request()->jenis_karya,
-                'id_bahasa' => Request()->jenis_karya,
-                'updated_at' => now()
-            ];
-            $this->KatalogModel->edit($id, $data);
-        }
-
-        return redirect()->route('katalog')->with('success', 'Data Berhasil diubah!');
-        // return redirect()->back()->with('success', 'Data Berhasil diubah!');
+      $this->KatalogModel->edit($id, $data);
+    } else {
+        // Jika tidak ganti gambar
+      $data = [
+        'judul_utama' => Request()->judul_utama,
+        'judul_sub' => Request()->judul_sub,
+        'pengarang' => Request()->pengarang,
+        'penerbit' => Request()->penerbit,
+        'tempat_terbit' => Request()->tempat_terbit,
+        'thn_terbit' => Request()->thn_terbit,
+        'jumlah_hlm' => Request()->jumlah_hlm,
+        'dimensi' => Request()->dimensi,
+        'kelas_ddc' => Request()->kelas_ddc,
+        'edisi' => Request()->edisi,
+        'no_panggil' => Request()->no_panggil,
+        'isbn' => Request()->isbn,
+        'id_jenis_karya' => Request()->jenis_karya,
+        'id_bahasa' => Request()->jenis_karya,
+        'updated_at' => now()
+      ];
+      $this->KatalogModel->edit($id, $data);
     }
-    public function uploadSampul($id)
-    {
-        //form validasi
-        Request()->validate(
-            [
-                'gambar' => 'required|mimes:jpeg,png,jpg|max:2024000',
-            ],
-            [
 
-                'gambar.required' => 'Wajib diisi!',
-                'gambar.mimes' => 'Format gambar tidak sesuai (png,jpg,jpeg)',
-                'gambar.max' => 'Ukuran maksimal 1024 MB',
-            ]
-        );
+    return redirect()->route('katalog')->with('success', 'Data Berhasil diubah!');
+    // return redirect()->back()->with('success', 'Data Berhasil diubah!');
+  }
 
-        //upload gambar
-        $file = Request()->gambar;
-        $filename = Request()->bib_id . '.' . $file->extension();
-        $file->move(public_path('img/img-katalog'), $filename);
+  public function uploadSampul($id)
+  {
+    //form validasi
+    Request()->validate(
+      [
+        'gambar' => 'required|mimes:jpeg,png,jpg|max:2024000',
+      ],
+      [
+        'gambar.required' => 'Wajib diisi!',
+        'gambar.mimes' => 'Format gambar tidak sesuai (png,jpg,jpeg)',
+        'gambar.max' => 'Ukuran maksimal 1024 MB',
+      ]
+    );
 
-        $data = [
+    //upload gambar
+    $file     = Request()->gambar;
+    $filename = Request()->bib_id . '.' . $file->extension();
+    $file->move(public_path('img/img-katalog'), $filename);
 
-            'sampul_depan' => $filename,
-        ];
+    $data = [
+      'sampul_depan' => $filename,
+    ];
 
-        $this->KatalogModel->edit($id, $data);
-        return redirect()->route('koleksi')->with('success', 'Data Berhasil ditambahkan!');
-    }
+    $this->KatalogModel->edit($id, $data);
+    return redirect()->route('koleksi')->with('success', 'Data Berhasil ditambahkan!');
+  }
+
+  public function destroy($id)
+  {
+    $this->katalog->where('bib_id', $id)->delete();
+    $this->koleksi->where('bib_id', $id)->delete();
+    return redirect('/katalog')->with('success', 'Data Berhasil dihapus');
+  }
 }

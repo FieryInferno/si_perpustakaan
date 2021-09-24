@@ -92,6 +92,7 @@ Route::post('/simpan-katalog', [App\Http\Controllers\KatalogController::class, '
 Route::post('/simpan-sampul/{id}', [App\Http\Controllers\KatalogController::class, 'uploadSampul'])->name('simpan-sampul')->middleware('petugas');
 Route::get('/edit-katalog/{id}', [App\Http\Controllers\KatalogController::class, 'editKatalog'])->name('edit-katalog')->middleware('petugas');
 Route::post('/simpan-edit-katalog/{id}', [App\Http\Controllers\KatalogController::class, 'simpanEdit'])->name('simpan-edit-katalog')->middleware('petugas');
+Route::delete('/petugas/katalog/{id}', [App\Http\Controllers\KatalogController::class, 'destroy'])->name('hapus_katalog')->middleware('petugas');
 
 Route::get('/koleksi', [App\Http\Controllers\KoleksiController::class, 'index'])->name('koleksi')->middleware('petugas');
 Route::get('/entri-koleksi', [App\Http\Controllers\KoleksiController::class, 'entriKoleksi'])->name('entri-koleksi')->middleware('petugas');
