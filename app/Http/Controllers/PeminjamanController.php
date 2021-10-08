@@ -61,7 +61,7 @@ class PeminjamanController extends Controller
       ->where('akses', 'Dapat dipinjam')->first(); // cek apakah buku dapat dipinjam
     $pinjam = DB::table('transaksi_koleksi')->where('kd_anggota', Request()->kd_anggota)
       ->where('status_pinjam', 'Pinjam')->first(); // cek apakah anggota sudah mengembalikan buku
-    $bahan = DB::table('v_koleksi_katalog')->where('id_buku', '0003')->first();
+    $bahan = DB::table('v_koleksi_katalog')->where('id_buku', Request()->id_buku)->first();
     if (!$dipinjam) {
       return redirect()->back()->with('warning', 'Buku belum dikembalikan atau sedang dipinjam');
     } else if (!$baca) {
