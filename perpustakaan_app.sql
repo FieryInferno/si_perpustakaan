@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 14 Jun 2021 pada 08.20
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 8.0.6
+-- Host: localhost
+-- Generation Time: Oct 08, 2021 at 10:50 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `anggota`
+-- Table structure for table `anggota`
 --
 
 CREATE TABLE `anggota` (
@@ -43,7 +43,7 @@ CREATE TABLE `anggota` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `anggota`
+-- Dumping data for table `anggota`
 --
 
 INSERT INTO `anggota` (`id`, `kd_anggota`, `no_identitas`, `nama_anggota`, `jkelamin`, `tempat_lahir`, `tgl_lahir`, `keanggotaan`, `status`, `gambar`, `created_at`, `updated_at`) VALUES
@@ -57,7 +57,7 @@ INSERT INTO `anggota` (`id`, `kd_anggota`, `no_identitas`, `nama_anggota`, `jkel
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bahasa`
+-- Table structure for table `bahasa`
 --
 
 CREATE TABLE `bahasa` (
@@ -66,7 +66,7 @@ CREATE TABLE `bahasa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `bahasa`
+-- Dumping data for table `bahasa`
 --
 
 INSERT INTO `bahasa` (`id`, `bahasa`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `bahasa` (`id`, `bahasa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -93,7 +93,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_bahan`
+-- Table structure for table `jenis_bahan`
 --
 
 CREATE TABLE `jenis_bahan` (
@@ -102,7 +102,7 @@ CREATE TABLE `jenis_bahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `jenis_bahan`
+-- Dumping data for table `jenis_bahan`
 --
 
 INSERT INTO `jenis_bahan` (`id`, `jenis_bahan`) VALUES
@@ -114,7 +114,7 @@ INSERT INTO `jenis_bahan` (`id`, `jenis_bahan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_karya`
+-- Table structure for table `jenis_karya`
 --
 
 CREATE TABLE `jenis_karya` (
@@ -123,7 +123,7 @@ CREATE TABLE `jenis_karya` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `jenis_karya`
+-- Dumping data for table `jenis_karya`
 --
 
 INSERT INTO `jenis_karya` (`id`, `jenis_karya`) VALUES
@@ -136,7 +136,7 @@ INSERT INTO `jenis_karya` (`id`, `jenis_karya`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `katalog`
+-- Table structure for table `katalog`
 --
 
 CREATE TABLE `katalog` (
@@ -163,7 +163,7 @@ CREATE TABLE `katalog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `katalog`
+-- Dumping data for table `katalog`
 --
 
 INSERT INTO `katalog` (`id`, `bib_id`, `judul_utama`, `judul_sub`, `pengarang`, `tempat_terbit`, `penerbit`, `thn_terbit`, `sampul_depan`, `jumlah_hlm`, `dimensi`, `edisi`, `kelas_ddc`, `no_panggil`, `isbn`, `id_bahasa`, `id_jenis_bahan`, `id_jenis_karya`, `created_at`, `updated_at`) VALUES
@@ -180,7 +180,7 @@ INSERT INTO `katalog` (`id`, `bib_id`, `judul_utama`, `judul_sub`, `pengarang`, 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `koleksi`
+-- Table structure for table `koleksi`
 --
 
 CREATE TABLE `koleksi` (
@@ -197,20 +197,20 @@ CREATE TABLE `koleksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `koleksi`
+-- Dumping data for table `koleksi`
 --
 
 INSERT INTO `koleksi` (`id`, `id_buku`, `tgl_pengadaan`, `jenis_sumber`, `nama_sumber`, `akses`, `ketersediaan`, `bib_id`, `created_at`, `updated_at`) VALUES
-(1, '0001', '2021-05-04', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-1120000002', '2021-05-04 06:46:37', '2021-06-11 21:39:05'),
+(1, '0001', '2021-05-04', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Dipinjam', '0010-1120000002', '2021-05-04 06:46:37', '2021-10-08 01:41:03'),
 (2, '09202', '2021-05-04', 'Pembelian', 'Sekolah', 'Baca ditempat', 'Tersedia', '0010-1120000004', '2021-05-04 02:35:38', NULL),
-(4, '0004', '2021-05-07', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-1120000003', '2021-05-07 00:55:00', '2021-06-04 06:13:39'),
+(4, '0004', '2021-05-07', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Dipinjam', '0010-1120000003', '2021-05-07 00:55:00', '2021-10-08 01:42:09'),
 (5, '012345', '2021-05-22', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-20000006', '2021-05-21 22:01:07', '2021-06-04 00:07:49'),
 (6, '000032', '2021-05-13', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-0000008', '2021-06-04 23:22:47', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kunjungan`
+-- Table structure for table `kunjungan`
 --
 
 CREATE TABLE `kunjungan` (
@@ -220,7 +220,7 @@ CREATE TABLE `kunjungan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kunjungan`
+-- Dumping data for table `kunjungan`
 --
 
 INSERT INTO `kunjungan` (`id`, `kd_anggota`, `tgl`) VALUES
@@ -232,7 +232,7 @@ INSERT INTO `kunjungan` (`id`, `kd_anggota`, `tgl`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -242,7 +242,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -259,7 +259,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -269,7 +269,7 @@ CREATE TABLE `password_resets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `password_resets`
+-- Dumping data for table `password_resets`
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
@@ -278,7 +278,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggaran`
+-- Table structure for table `pelanggaran`
 --
 
 CREATE TABLE `pelanggaran` (
@@ -290,20 +290,10 @@ CREATE TABLE `pelanggaran` (
   `jumlah_denda` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `pelanggaran`
---
-
-INSERT INTO `pelanggaran` (`id`, `no_transaksi`, `id_buku`, `jenis_pelanggaran`, `jenis_denda`, `jumlah_denda`) VALUES
-(1, '202100001', NULL, 'Rusak', 'Ganti Uang', 50000),
-(2, '202100001', NULL, 'Rusak', 'Ganti Uang', 50000),
-(3, '202100002', '0004', 'Rusak', 'Ganti Koleksi yang Sama', NULL),
-(4, '202100002', '0004', 'Rusak', 'Ganti Koleksi yang Sama', NULL);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tamu`
+-- Table structure for table `tamu`
 --
 
 CREATE TABLE `tamu` (
@@ -315,7 +305,7 @@ CREATE TABLE `tamu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tamu`
+-- Dumping data for table `tamu`
 --
 
 INSERT INTO `tamu` (`id`, `nama`, `instansi`, `keperluan`, `tgl`) VALUES
@@ -330,7 +320,7 @@ INSERT INTO `tamu` (`id`, `nama`, `instansi`, `keperluan`, `tgl`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `temp_kembali`
+-- Table structure for table `temp_kembali`
 --
 
 CREATE TABLE `temp_kembali` (
@@ -341,7 +331,7 @@ CREATE TABLE `temp_kembali` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `temp_kembali`
+-- Dumping data for table `temp_kembali`
 --
 
 INSERT INTO `temp_kembali` (`id_buku`, `no_transaksi`, `tgl_pinjam`, `jatuh_tempo`) VALUES
@@ -350,7 +340,7 @@ INSERT INTO `temp_kembali` (`id_buku`, `no_transaksi`, `tgl_pinjam`, `jatuh_temp
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `temp_peminjaman`
+-- Table structure for table `temp_peminjaman`
 --
 
 CREATE TABLE `temp_peminjaman` (
@@ -363,7 +353,7 @@ CREATE TABLE `temp_peminjaman` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_koleksi`
+-- Table structure for table `transaksi_koleksi`
 --
 
 CREATE TABLE `transaksi_koleksi` (
@@ -378,24 +368,10 @@ CREATE TABLE `transaksi_koleksi` (
   `tinyint` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `transaksi_koleksi`
---
-
-INSERT INTO `transaksi_koleksi` (`no`, `no_transaksi`, `kd_anggota`, `id_buku`, `tgl_pinjam`, `jatuh_tempo`, `tgl_kembali`, `status_pinjam`, `tinyint`) VALUES
-(1, '202100001', 'S00001', '0001', '2021-05-15', '2021-05-19', '2021-06-04', 'Kembali', 1),
-(2, '202100001', 'S00001', '0004', '2021-05-15', '2021-05-18', '2021-06-04', 'Kembali', 1),
-(3, '202100002', 'S08982', '0004', '2021-06-04', '2021-06-07', '2021-06-04', 'Kembali', 1),
-(4, '202100002', 'S08982', '012345', '2021-06-04', '2021-06-07', '2021-06-04', 'Kembali', 1),
-(5, '202100000003', 'S00004', '0001', '2021-06-04', NULL, '2021-06-04', 'Kembali', 1),
-(6, '202100000003', 'S00004', '0004', '2021-06-04', NULL, '2021-06-04', 'Kembali', 1),
-(7, '202100000003', '10104019', '0001', '2020-06-09', NULL, '2021-06-09', 'Kembali', 1),
-(8, '202100000003', '10104019', '0001', '2021-06-12', NULL, '2021-06-12', 'Kembali', 1);
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -410,7 +386,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `is_admin`, `remember_token`, `created_at`, `updated_at`) VALUES
@@ -422,8 +398,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `is_admin`, `remember_to
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `v_eksemplar`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `v_eksemplar`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_eksemplar` (
 `id_katalog` varchar(255)
@@ -457,8 +433,8 @@ CREATE TABLE `v_eksemplar` (
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `v_koleksi_katalog`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `v_koleksi_katalog`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_koleksi_katalog` (
 `id_buku` varchar(100)
@@ -491,8 +467,8 @@ CREATE TABLE `v_koleksi_katalog` (
 -- --------------------------------------------------------
 
 --
--- Stand-in struktur untuk tampilan `v_transaksi`
--- (Lihat di bawah untuk tampilan aktual)
+-- Stand-in structure for view `v_transaksi`
+-- (See below for the actual view)
 --
 CREATE TABLE `v_transaksi` (
 `kd_anggota` varchar(255)
@@ -520,7 +496,7 @@ CREATE TABLE `v_transaksi` (
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `v_eksemplar`
+-- Structure for view `v_eksemplar`
 --
 DROP TABLE IF EXISTS `v_eksemplar`;
 
@@ -529,7 +505,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `v_koleksi_katalog`
+-- Structure for view `v_koleksi_katalog`
 --
 DROP TABLE IF EXISTS `v_koleksi_katalog`;
 
@@ -538,7 +514,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `v_transaksi`
+-- Structure for view `v_transaksi`
 --
 DROP TABLE IF EXISTS `v_transaksi`;
 
@@ -549,20 +525,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
--- Indeks untuk tabel `bahasa`
+-- Indexes for table `bahasa`
 --
 ALTER TABLE `bahasa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `jenis_bahan`
+-- Indexes for table `jenis_bahan`
 --
 ALTER TABLE `jenis_bahan`
   ADD PRIMARY KEY (`id`),
@@ -570,7 +546,7 @@ ALTER TABLE `jenis_bahan`
   ADD UNIQUE KEY `jenis_bahan_jenis_bahan_unique` (`jenis_bahan`);
 
 --
--- Indeks untuk tabel `jenis_karya`
+-- Indexes for table `jenis_karya`
 --
 ALTER TABLE `jenis_karya`
   ADD PRIMARY KEY (`id`),
@@ -578,138 +554,138 @@ ALTER TABLE `jenis_karya`
   ADD UNIQUE KEY `jenis_karya_jenis_karya_unique` (`jenis_karya`);
 
 --
--- Indeks untuk tabel `katalog`
+-- Indexes for table `katalog`
 --
 ALTER TABLE `katalog`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `katalog_bib_id_unique` (`bib_id`);
 
 --
--- Indeks untuk tabel `koleksi`
+-- Indexes for table `koleksi`
 --
 ALTER TABLE `koleksi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kunjungan`
+-- Indexes for table `kunjungan`
 --
 ALTER TABLE `kunjungan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indeks untuk tabel `pelanggaran`
+-- Indexes for table `pelanggaran`
 --
 ALTER TABLE `pelanggaran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `tamu`
+-- Indexes for table `tamu`
 --
 ALTER TABLE `tamu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `temp_peminjaman`
+-- Indexes for table `temp_peminjaman`
 --
 ALTER TABLE `temp_peminjaman`
   ADD PRIMARY KEY (`id_buku`);
 
 --
--- Indeks untuk tabel `transaksi_koleksi`
+-- Indexes for table `transaksi_koleksi`
 --
 ALTER TABLE `transaksi_koleksi`
   ADD PRIMARY KEY (`no`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `bahasa`
+-- AUTO_INCREMENT for table `bahasa`
 --
 ALTER TABLE `bahasa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_bahan`
+-- AUTO_INCREMENT for table `jenis_bahan`
 --
 ALTER TABLE `jenis_bahan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_karya`
+-- AUTO_INCREMENT for table `jenis_karya`
 --
 ALTER TABLE `jenis_karya`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `katalog`
+-- AUTO_INCREMENT for table `katalog`
 --
 ALTER TABLE `katalog`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `koleksi`
+-- AUTO_INCREMENT for table `koleksi`
 --
 ALTER TABLE `koleksi`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `kunjungan`
+-- AUTO_INCREMENT for table `kunjungan`
 --
 ALTER TABLE `kunjungan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggaran`
+-- AUTO_INCREMENT for table `pelanggaran`
 --
 ALTER TABLE `pelanggaran`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `tamu`
+-- AUTO_INCREMENT for table `tamu`
 --
 ALTER TABLE `tamu`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi_koleksi`
+-- AUTO_INCREMENT for table `transaksi_koleksi`
 --
 ALTER TABLE `transaksi_koleksi`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
