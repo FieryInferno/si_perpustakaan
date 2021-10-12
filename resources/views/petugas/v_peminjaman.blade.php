@@ -27,16 +27,16 @@
           <div class="table-responsive">
             <table id="userstable" class="table table-bordered table-striped">
               <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>No.Transaksi</th>
-                    <th>Barcode Buku</th>
-                    <th>Deskripsi Buku</th>
-                    <th>Nama Peminjam</th>
-                    <th>Tgl.Pinjam</th>
-                    <th>Tgl.Kembali</th>
-                    <th>Terlambat</th>
-                  </tr>
+                <tr>
+                  <th>No.</th>
+                  <th>No.Transaksi</th>
+                  <th>Barcode Buku</th>
+                  <th>Deskripsi Buku</th>
+                  <th>Nama Peminjam</th>
+                  <th>Tgl.Pinjam</th>
+                  <th>Tgl.Kembali</th>
+                  <th>Terlambat</th>
+                </tr>
               </thead>
               <tbody>
                 <?php $no = 1; ?>
@@ -50,24 +50,26 @@
                         {{ $data->jumlah_hlm}} ; {{$data->dimensi}} <br>
                         {{ $data->bahan}}
                     </td>
-                    <td>{{$data->nama_anggota}}</td>
-                    <td>{{ $data->tgl_pinjam}}</td>
-                    <td>{{ $data->jatuh_tempo}}</td>
+                    <td>{{ $data->nama_anggota}}</td>
+                    <td>{{ tgl_indo($data->tgl_pinjam) }}</td>
+                    <td>{{ tgl_indo($data->jatuh_tempo) }}</td>
                     <?php
                     $tgl1 = $data->jatuh_tempo;
-                    $tgl2 = now();
+                    $tgl2 = $data->tgl_kembali;
                     $diff = strtotime($tgl2) - strtotime($tgl1);
-                    $cal = ceil(abs($diff / (86400)) - 1) + 1;
-                    if ($data->jatuh_tempo == null) {
-                        echo '<td> 2 Semester </td>';
+                    
+                    if ($diff > 0) {
+                      $cal = ceil(abs($diff / (86400)) - 1) + 1;
+                      if ($cal > 3) {
+                        $hari = $cal - 3;
+                        echo ' <td class="table-danger"> ' . $hari . ' Hari</td>';
+                      } else {
+                        echo ' <td> - </td>';
+                      }
                     } else {
-                        if ($cal > 3) {
-                            $hari = $cal - 3;
-                            echo ' <td class="table-danger"> ' . $hari . ' Hari</td>';
-                        } else {
-                            echo ' <td> - </td>';
-                        }
+                      echo ' <td> - </td>';
                     }
+                    
 
                     ?>
                 </tr>
