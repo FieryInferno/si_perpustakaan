@@ -24,7 +24,10 @@ class PengembalianController extends Controller
   public function index()
   {
     $data = [
-      'pinjam' => DB::table('transaksi_koleksi')->join('v_koleksi_katalog', 'v_koleksi_katalog.id_buku', '=', 'transaksi_koleksi.id_buku')
+      'pinjam' => DB::table('transaksi_koleksi')
+        ->join('koleksi', 'koleksi.id_buku', '=', 'transaksi_koleksi.id_buku')
+        ->join('katalog', 'katalog.bib_id', '=', 'koleksi.bib_id')
+        ->join('jenis_bahan', 'katalog.id_jenis_bahan', '=', 'jenis_bahan.id')
         ->join('anggota', 'anggota.kd_anggota', '=', 'transaksi_koleksi.kd_anggota')
         ->where('tinyint', '1')->get()
     ];

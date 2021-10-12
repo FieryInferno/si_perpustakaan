@@ -47,17 +47,16 @@
                   <td><label>{{ $data->judul_utama}} - {{$data->id_buku}}</label> <br>
                       {{ $data->tempat_terbit}} : {{ $data->penerbit}}, {{ $data->thn_terbit}} <br>
                       {{ $data->jumlah_hlm}} ; {{$data->dimensi}} <br>
-                      {{ $data->bahan}}
+                      {{ $data->jenis_bahan}}
                   </td>
                   <td>{{ tgl_indo($data->tgl_pinjam) }}</td>
                   <td>{{ tgl_indo($data->tgl_kembali) }}</td>
                   <?php
                   $tgl1 = $data->jatuh_tempo;
-                  $tgl2 = now();
+                  $tgl2 = $data->tgl_kembali;
                   $diff = strtotime($tgl2) - strtotime($tgl1);
                   $cal = ceil(abs($diff / (86400)) - 1) + 1;
                   if ($data->jatuh_tempo == null) {
-                      echo '<td> - </td>';
                   } else {
                       if ($cal > 3) {
                           $hari = $cal - 3;
