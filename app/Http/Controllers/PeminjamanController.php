@@ -65,6 +65,7 @@ class PeminjamanController extends Controller
     //   ->where('status_pinjam', 'Pinjam')->first();
 
     $bahan = DB::table('v_koleksi_katalog')->where('id_buku', Request()->id_buku)->first();
+
     if (!$dipinjam) {
       return redirect()->back()->with('warning', 'Buku belum dikembalikan atau sedang dipinjam');
     } else if (!$baca) {
@@ -84,29 +85,22 @@ class PeminjamanController extends Controller
       ]
     );
 
-    if ($bahan->id_bahan == 1 && $bahan->id_bahan == 2) {
-      $now    = date('Y-m-d');
-      $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
-      $data   = [
-        'kd_anggota' => Request()->kd_anggota,
-        'id_buku' => Request()->id_buku,
-        'tgl_pinjam' => $now,
-        'jatuh_tempo' => null,
-      ];
-      $this->TempPinjamModel->simpan($data);
-      return redirect()->back();
+    $now  = date('Y-m-d');
+
+    if ($bahan->id_bahan == 1 || $bahan->id_bahan == 2) {
+      $addDay = date('Y-m-d', strtotime('+180 days', strtotime($now)));
     } else {
-      $now    = date('Y-m-d');
       $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
-      $data   = [
-        'kd_anggota' => Request()->kd_anggota,
-        'id_buku' => Request()->id_buku,
-        'tgl_pinjam' => $now,
-        'jatuh_tempo' => $addDay,
-      ];
-      $this->TempPinjamModel->simpan($data);
-      return redirect()->back();
     }
+
+    $data   = [
+      'kd_anggota'  => Request()->kd_anggota,
+      'id_buku'     => Request()->id_buku,
+      'tgl_pinjam'  => $now,
+      'jatuh_tempo' => $addDay,
+    ];
+    $this->TempPinjamModel->simpan($data);
+    return redirect()->back();
   }
 
   public function hapus($id)
