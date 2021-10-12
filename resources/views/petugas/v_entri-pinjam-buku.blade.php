@@ -163,7 +163,7 @@
                                       $hari   = $cal - 3;
                                       $denda  = $cal * 500;
 
-                                      if ($pinjam->id_bahan == 1 || $pinjam->id_bahan == 2) {
+                                      if ($pinjam->id_jenis_bahan == 1 || $pinjam->id_jenis_bahan == 2) {
                                         echo '<tr>';
                                         echo ' <td> ' . $no++ . '</td>';
                                         echo ' <td> ' . $pinjam->id_buku . '</td>';

@@ -64,7 +64,10 @@ class PeminjamanController extends Controller
     // $pinjam = DB::table('transaksi_koleksi')->where('kd_anggota', Request()->kd_anggota)
     //   ->where('status_pinjam', 'Pinjam')->first();
 
-    $bahan = DB::table('v_koleksi_katalog')->where('id_buku', Request()->id_buku)->first();
+    $bahan = DB::table('koleksi')
+      ->join('katalog', 'koleksi.bib_id', '=', 'katalog.bib_id')
+      ->where('id_buku', Request()->id_buku)
+      ->first();
 
     if (!$dipinjam) {
       return redirect()->back()->with('warning', 'Buku belum dikembalikan atau sedang dipinjam');
@@ -87,7 +90,7 @@ class PeminjamanController extends Controller
 
     $now  = date('Y-m-d');
 
-    if ($bahan->id_bahan == 1 || $bahan->id_bahan == 2) {
+    if ($bahan->id_jenis_bahan == 1 || $bahan->id_jenis_bahan == 2) {
       $addDay = date('Y-m-d', strtotime('+180 days', strtotime($now)));
     } else {
       $addDay = date('Y-m-d', strtotime('+3 days', strtotime($now)));
