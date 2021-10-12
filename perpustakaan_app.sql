@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 08, 2021 at 10:50 AM
+-- Generation Time: Oct 12, 2021 at 06:03 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -52,7 +52,7 @@ INSERT INTO `anggota` (`id`, `kd_anggota`, `no_identitas`, `nama_anggota`, `jkel
 (5, 'S00003', '03281093', 'Arman Ghani', 'Laki-laki', 'Denpasar', '2021-04-27', 'Non-aktif', 'Siswa', '03281093.jpg', '2021-04-08 18:00:09', '2021-06-04 23:32:34'),
 (6, 'S00004', '09120912', 'Fina Pandu', 'Perempuan', 'Depok', '2021-04-27', 'Aktif', 'Siswa', '-Fina Pandu.png', '2021-04-08 18:00:09', '2021-04-28 12:02:24'),
 (9, 'S00025', '83127678721', 'Asmaya', 'Perempuan', 'Solo', '1986-01-06', 'Aktif', 'Guru', 'Guru-Asmaya-83127678721.png', '2021-04-08 18:00:09', NULL),
-(0, '10104019', '3213012611980001', 'M. Bagas Setia', 'Laki-laki', 'Bandung', '2000-11-26', 'Aktif', 'Siswa', 'Siswa-M. Bagas Setia-3213012611980001.jpg', NULL, '2021-06-06 03:09:06');
+(10, '10104019', '3213012611980001', 'M. Bagas Setia', 'Laki-laki', 'Bandung', '2000-11-26', 'Aktif', 'Siswa', 'Siswa-M. Bagas Setia-3213012611980001.jpg', NULL, '2021-06-06 03:09:06');
 
 -- --------------------------------------------------------
 
@@ -525,6 +525,12 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `anggota`
+--
+ALTER TABLE `anggota`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `bahasa`
 --
 ALTER TABLE `bahasa`
@@ -617,6 +623,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `anggota`
+--
+ALTER TABLE `anggota`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `bahasa`

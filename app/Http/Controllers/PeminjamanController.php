@@ -33,10 +33,8 @@ class PeminjamanController extends Controller
 
   public function cariAnggota()
   {
-    $id = [
-      'kd_anggota' => Request()->kd_anggota
-    ];
-    $keanggotaan = DB::table('anggota')->where('kd_anggota', $id)
+    $id           = ['kd_anggota' => Request()->kd_anggota];
+    $keanggotaan  = DB::table('anggota')->where('kd_anggota', $id)
         ->where('keanggotaan', 'Aktif')->first(); // cek apakah anggota aktif
 
     if (!$this->AnggotaModel->detailData($id)) {
@@ -55,20 +53,26 @@ class PeminjamanController extends Controller
 
   public function pilihBuku()
   {
-    $dipinjam = DB::table('koleksi')->where('id_buku', Request()->id_buku)
+    $dipinjam = DB::table('koleksi')
+      ->where('id_buku', Request()->id_buku)
       ->where('ketersediaan', 'Tersedia')->first(); //cek ketersediaan buku
+      
     $baca = DB::table('koleksi')->where('id_buku', Request()->id_buku)
       ->where('akses', 'Dapat dipinjam')->first(); // cek apakah buku dapat dipinjam
-    $pinjam = DB::table('transaksi_koleksi')->where('kd_anggota', Request()->kd_anggota)
-      ->where('status_pinjam', 'Pinjam')->first(); // cek apakah anggota sudah mengembalikan buku
+
+    // cek apakah anggota sudah mengembalikan buku
+    // $pinjam = DB::table('transaksi_koleksi')->where('kd_anggota', Request()->kd_anggota)
+    //   ->where('status_pinjam', 'Pinjam')->first();
+
     $bahan = DB::table('v_koleksi_katalog')->where('id_buku', Request()->id_buku)->first();
     if (!$dipinjam) {
       return redirect()->back()->with('warning', 'Buku belum dikembalikan atau sedang dipinjam');
     } else if (!$baca) {
       return redirect()->back()->with('warning', 'Buku Tidak Dapat dipinjam');
-    } else if ($pinjam) {
-      return redirect()->back()->with('warning', 'Anggota belum mengembalikan buku');
     }
+    // else if ($pinjam) {
+    //   return redirect()->back()->with('warning', 'Anggota belum mengembalikan buku');
+    // }
     
     Request()->validate(
       [
