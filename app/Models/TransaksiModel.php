@@ -46,8 +46,10 @@ class TransaksiModel extends Model
   {
     return DB::table('transaksi_koleksi')
       ->join('anggota', 'anggota.kd_anggota', '=', 'transaksi_koleksi.kd_anggota')
-      ->join('v_koleksi_katalog', 'v_koleksi_katalog.id_buku', '=', 'transaksi_koleksi.id_buku')
-      ->where('transaksi_koleksi.status_pinjam', 'Pinjam')->get(['transaksi_koleksi.*', 'v_koleksi_katalog.*', 'anggota.*']);
+      ->join('koleksi', 'koleksi.id_buku', '=', 'transaksi_koleksi.id_buku')
+      ->join('katalog', 'katalog.bib_id', '=', 'koleksi.bib_id')
+      ->join('jenis_bahan', 'katalog.id_jenis_bahan', '=', 'jenis_bahan.id')
+      ->where('transaksi_koleksi.status_pinjam', 'Pinjam')->get(['transaksi_koleksi.*', 'koleksi.*', 'katalog.*', 'anggota.*', 'jenis_bahan.*']);
   }
     
     public function editPengembalian($id, $data)

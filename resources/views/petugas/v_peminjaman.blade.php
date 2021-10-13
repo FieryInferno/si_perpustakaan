@@ -48,7 +48,7 @@
                     <td><label>{{ $data->judul_utama}}</label> <br>
                         {{ $data->tempat_terbit}} : {{ $data->penerbit}}, {{ $data->thn_terbit}} <br>
                         {{ $data->jumlah_hlm}} ; {{$data->dimensi}} <br>
-                        {{ $data->bahan}}
+                        {{ $data->jenis_bahan}}
                     </td>
                     <td>{{ $data->nama_anggota}}</td>
                     <td>{{ tgl_indo($data->tgl_pinjam) }}</td>
