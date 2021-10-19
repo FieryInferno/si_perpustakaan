@@ -69,39 +69,33 @@
                     $tgl1   = $pinjam->jatuh_tempo;
                     $tgl2   = now();
                     $diff   = strtotime($tgl2) - strtotime($tgl1);
-                    $cal    = ceil(abs($diff / (86400)) - 1) + 1;
-                    $hari   = $cal - 3;
-                    $denda  = $cal * 500;
-                    if ($pinjam->jatuh_tempo == null) {
+                    print_r($diff);
+                    if ($diff > 0) {
+                      $cal    = ceil(abs($diff / (86400)) - 1) + 1;
+                      $hari   = $cal - 3;
+                      $denda  = $cal * 500;
+                    } else {
+                      $hari = 0;
+                    }
+                    
+                    if ($hari > 3) {
+                      echo '<tr class="table-danger">';
+                    } else {
                       echo '<tr>';
-                      echo ' <td>' . $no++ . '</td>';
-                      echo ' <td>' . $pinjam->no_transaksi . '</td>';
-                      echo ' <td>' . $pinjam->id_buku . '</td>';
-                      echo ' <td>' . $pinjam->judul_utama . '</td>';
-                      echo ' <td>' . tgl_indo($pinjam->tgl_pinjam) . '</td>';
-                      echo ' <td>' . $pinjam->jatuh_tempo . '</td>';
+                    }
+                    echo ' <td>' . $no++ . '</td>';
+                    echo ' <td>' . $pinjam->no_transaksi . '</td>';
+                    echo ' <td>' . $pinjam->id_buku . '</td>';
+                    echo ' <td>' . $pinjam->judul_utama . '</td>';
+                    echo ' <td>' . tgl_indo($pinjam->tgl_pinjam) . '</td>';
+                    echo ' <td>' . tgl_indo($pinjam->jatuh_tempo) . '</td>';
+
+                    if ($hari > 3) {
+                      echo ' <td> ' . $cal . ' Hari</td>';
+                      echo '<td> Rp.' . $denda . '</td>';
+                    } else {
                       echo ' <td> - </td>';
                       echo '<td> - </td>';
-                    } else {
-                      if ($hari > 3) {
-                        echo '<tr class="table-danger">';
-                      } else {
-                        echo '<tr>';
-                      }
-                      echo ' <td>' . $no++ . '</td>';
-                      echo ' <td>' . $pinjam->no_transaksi . '</td>';
-                      echo ' <td>' . $pinjam->id_buku . '</td>';
-                      echo ' <td>' . $pinjam->judul_utama . '</td>';
-                      echo ' <td>' . tgl_indo($pinjam->tgl_pinjam) . '</td>';
-                      echo ' <td>' . tgl_indo($pinjam->jatuh_tempo) . '</td>';
-
-                      if ($hari > 3) {
-                        echo ' <td> ' . $cal . ' Hari</td>';
-                        echo '<td> Rp.' . $denda . '</td>';
-                      } else {
-                        echo ' <td> - </td>';
-                        echo '<td> - </td>';
-                      }
                     }
                   ?>
                   <td><a href="{{url('pelanggaran')}}/{{$pinjam->no }}" class="btn btn-danger">Pelanggaran</a></td>
