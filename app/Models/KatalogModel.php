@@ -20,11 +20,12 @@ class KatalogModel extends Model
 
   public function detailData($id)
   {
-    return DB::table('katalog')->join('jenis_karya', 'jenis_karya.id', '=', 'katalog.id_jenis_karya')
-        ->join('jenis_bahan', 'jenis_bahan.id', '=', 'katalog.id_jenis_bahan')
-        ->join('bahasa', 'bahasa.id', '=', 'katalog.id_bahasa')
-        ->get(['katalog.*', 'jenis_karya.id as id_karya', 'jenis_karya.jenis_karya as karya', 'jenis_bahan.id as id_bahan', 'jenis_bahan.jenis_bahan as bahan', 'bahasa.id as id_bahasa', 'bahasa.bahasa as bahasa'])
-        ->where('bib_id', $id)->first();
+    return DB::table('katalog')
+      ->join('jenis_karya', 'jenis_karya.id', '=', 'katalog.id_jenis_karya')
+      ->join('jenis_bahan', 'jenis_bahan.id', '=', 'katalog.id_jenis_bahan')
+      ->join('bahasa', 'bahasa.id', '=', 'katalog.id_bahasa')
+      ->get(['katalog.*', 'jenis_karya.id as id_karya', 'jenis_karya.jenis_karya as karya', 'jenis_bahan.id as id_bahan', 'jenis_bahan.jenis_bahan as bahan', 'bahasa.id as id_bahasa', 'bahasa.bahasa as bahasa'])
+      ->where('bib_id', $id)->first();
   }
 
   public function jenisBahan()

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 12, 2021 at 06:03 AM
+-- Generation Time: Oct 19, 2021 at 04:23 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -52,7 +52,10 @@ INSERT INTO `anggota` (`id`, `kd_anggota`, `no_identitas`, `nama_anggota`, `jkel
 (5, 'S00003', '03281093', 'Arman Ghani', 'Laki-laki', 'Denpasar', '2021-04-27', 'Non-aktif', 'Siswa', '03281093.jpg', '2021-04-08 18:00:09', '2021-06-04 23:32:34'),
 (6, 'S00004', '09120912', 'Fina Pandu', 'Perempuan', 'Depok', '2021-04-27', 'Aktif', 'Siswa', '-Fina Pandu.png', '2021-04-08 18:00:09', '2021-04-28 12:02:24'),
 (9, 'S00025', '83127678721', 'Asmaya', 'Perempuan', 'Solo', '1986-01-06', 'Aktif', 'Guru', 'Guru-Asmaya-83127678721.png', '2021-04-08 18:00:09', NULL),
-(10, '10104019', '3213012611980001', 'M. Bagas Setia', 'Laki-laki', 'Bandung', '2000-11-26', 'Aktif', 'Siswa', 'Siswa-M. Bagas Setia-3213012611980001.jpg', NULL, '2021-06-06 03:09:06');
+(10, '10104019', '3213012611980001', 'M. Bagas Setia', 'Laki-laki', 'Bandung', '2000-11-26', 'Aktif', 'Siswa', 'Siswa-M. Bagas Setia-3213012611980001.jpg', NULL, '2021-06-06 03:09:06'),
+(17, 'S0001', 'S0001', 'ucup', 'Laki-laki', 'pangkalan bun', '2000-01-01', 'Aktif', 'Siswa', '-ucup.jpg', '2021-10-11 20:35:00', '2021-10-12 01:11:50'),
+(19, 'S0002', 'S0002', 'Bujang', 'Laki-laki', 'Balikpapan', '2001-01-01', 'Aktif', 'Siswa', 'Siswa-Bujang-S0002.jpg', '2021-10-11 20:44:07', NULL),
+(20, '098985', '098985', 'Randy', 'Laki-laki', 'Jakarta', '2021-10-12', 'Aktif', 'Siswa', 'Siswa-Randy-098985.jpg', '2021-10-11 23:29:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -175,7 +178,12 @@ INSERT INTO `katalog` (`id`, `bib_id`, `judul_utama`, `judul_sub`, `pengarang`, 
 (8, '0010-20000006', 'Buku Matematika Kelas XII', 'Matematika untuk kelas XII', 'Abdur Rahman As\'ari, Dr, H, M.Pd, M.A / Dahliatul Hasanah / Ipung Yuwono / Latifah Mustofa L / Lathi', 'Jakarta', 'Buku Sekolah Elektronik (BSE)', 'Juni 2018', '0010-20000006-Buku Matematika Kelas XII.jpg', '242', '13 x 19 cm', 'Edisi revisi 2018 kurikulum 2013', '510.1', '510.1', '129821-12982-1212', '1', '1', '1', '2021-05-21 21:59:28', '2021-05-21 22:00:06'),
 (9, '0010-0000007', 'Buku Matematika Kelas 10 Kurikulum 2013', 'Matematika Kelas 10', 'Asri', 'Jakarta', 'Buku Sekolah Elektronik (BSE)', '2018', '0010-0000007-Buku Matematika Kelas 10 Kurikulum 2013.jpg', '250', '13 x 15 cm', 'Revisi 2018', '510.0', '510.0', '12989-1298-129', '1', '2', '1', '2021-05-21 22:05:46', '2021-05-21 22:24:24'),
 (10, '0010-0000008', 'Kamus Bahasa Jepang', 'Indonesia - Jepang', 'Kano', 'Jakarta', 'Gramedi', '2019', 'sampul-default.png', '200', '18cm x 25cm', '-', '410.1', '410.1 Ka', '98320-320923-2309', '1', '3', '1', '2021-06-04 23:21:45', NULL),
-(11, '0010-0000009', 'Matematika Dasar', 'Matematika untuk SD', 'Nunu', 'Subang', 'Erlangga', '2021', 'sampul-default.png', '120', '10 cm x 25 cm', NULL, '510.370', '510.370', '1221-1221-1221', '4', '2', '4', '2021-06-06 03:12:59', NULL);
+(11, '0010-0000009', 'Matematika Dasar', 'Matematika untuk SD', 'Nunu', 'Subang', 'Erlangga', '2021', 'sampul-default.png', '120', '10 cm x 25 cm', NULL, '510.370', '510.370', '1221-1221-1221', '1', '2', '4', '2021-06-06 03:12:59', NULL),
+(12, '0010-0000010', 'Bahasa indonesia', 'bahasa', 'jufri', 'jakarta', 'mediatama', '2021', 'sampul-default.png', '200', '100x100', '2', '111.111', '111.121', '1000-2222-2222-322', '1', '2', '5', '2021-10-11 20:36:59', NULL),
+(14, '0010-0000012', 'biologi kelas 10', 'ilmu pengetahuan alam', 'jufri', 'jakarta', 'mediatama', '2021', 'sampul-default.png', '200', '100x100', '1', '111.145', '111.145', '1000-2222-2212', '1', '2', '1', '2021-10-12 01:12:52', NULL),
+(15, '0010-0000013', 'biologi', 'ilmu pengetahuan alam', 'jufri', 'jakarta', 'Erlangga', '2021', 'sampul-default.png', '200', '100x100', '1', '111.321', '111.321', '1000-2222-2225', '1', '2', '5', '2021-10-12 01:22:29', NULL),
+(16, '0010-0000014', 'Sebuah Seni Untuk Bersikap Bodo Amat', 'Pendekatan yang Waras Demi Menjalani Hidup yang Baik', 'Mark Manson', 'Bandung', 'Gramedia', '2012', 'sampul-default.png', '160', '3 x 4', 'Spesial', '12345678', '1234567', '1234578', '2', '2', '2', '2021-10-17 19:16:35', NULL),
+(18, '0010-0000015', 'Kamus Jerman', 'Kamus Jerman', 'Agus Mulyono', 'Bandung', 'Gramedia', '2012', 'sampul-default.png', '507', '21', 'Spesial', '12345678', '1234567', '1234578', '1', '3', '5', '2021-10-18 19:02:55', NULL);
 
 -- --------------------------------------------------------
 
@@ -201,11 +209,15 @@ CREATE TABLE `koleksi` (
 --
 
 INSERT INTO `koleksi` (`id`, `id_buku`, `tgl_pengadaan`, `jenis_sumber`, `nama_sumber`, `akses`, `ketersediaan`, `bib_id`, `created_at`, `updated_at`) VALUES
-(1, '0001', '2021-05-04', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Dipinjam', '0010-1120000002', '2021-05-04 06:46:37', '2021-10-08 01:41:03'),
+(1, '0001', '2021-05-04', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Dipinjam', '0010-1120000002', '2021-05-04 06:46:37', '2021-10-18 19:08:11'),
 (2, '09202', '2021-05-04', 'Pembelian', 'Sekolah', 'Baca ditempat', 'Tersedia', '0010-1120000004', '2021-05-04 02:35:38', NULL),
-(4, '0004', '2021-05-07', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Dipinjam', '0010-1120000003', '2021-05-07 00:55:00', '2021-10-08 01:42:09'),
-(5, '012345', '2021-05-22', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-20000006', '2021-05-21 22:01:07', '2021-06-04 00:07:49'),
-(6, '000032', '2021-05-13', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-0000008', '2021-06-04 23:22:47', NULL);
+(4, '0004', '2021-05-07', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-1120000003', '2021-05-07 00:55:00', '2021-10-12 00:59:14'),
+(5, '012345', '2021-05-22', 'Pengadaan', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-20000006', '2021-05-21 22:01:07', '2021-10-12 01:14:31'),
+(6, '000032', '2021-05-13', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-0000008', '2021-06-04 23:22:47', NULL),
+(7, '11233', '2020-02-02', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-0000010', '2021-10-11 20:38:15', '2021-10-12 01:11:04'),
+(9, '0011', '2021-02-20', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Tersedia', '0010-0000012', '2021-10-12 01:13:18', '2021-10-12 01:14:12'),
+(11, '0010', '2021-02-20', 'Pembelian', 'Sekolah', 'Dapat dipinjam', 'Dipinjam', '0010-0000013', '2021-10-12 01:23:07', '2021-10-18 19:06:31'),
+(12, '321301', '2021-10-19', 'Pembelian', 'dsfad', 'Dapat dipinjam', 'Tersedia', '0010-0000015', '2021-10-18 19:03:40', '2021-10-18 19:13:52');
 
 -- --------------------------------------------------------
 
@@ -290,6 +302,14 @@ CREATE TABLE `pelanggaran` (
   `jumlah_denda` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `pelanggaran`
+--
+
+INSERT INTO `pelanggaran` (`id`, `no_transaksi`, `id_buku`, `jenis_pelanggaran`, `jenis_denda`, `jumlah_denda`) VALUES
+(5, '202100000000', '0001', 'Hilang', 'Ganti Koleksi yang Sama', NULL),
+(6, '202100000005', '0001', 'Hilang', 'Ganti Uang', 500);
+
 -- --------------------------------------------------------
 
 --
@@ -367,6 +387,14 @@ CREATE TABLE `transaksi_koleksi` (
   `status_pinjam` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT 'Pinjam',
   `tinyint` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi_koleksi`
+--
+
+INSERT INTO `transaksi_koleksi` (`no`, `no_transaksi`, `kd_anggota`, `id_buku`, `tgl_pinjam`, `jatuh_tempo`, `tgl_kembali`, `status_pinjam`, `tinyint`) VALUES
+(29, '202100000000', '098985', '0001', '2021-10-19', '2022-04-17', NULL, 'Pinjam', NULL),
+(30, '202100000001', '098985', '321301', '2021-10-19', '2021-10-22', '2021-10-19', 'Kembali', 1);
 
 -- --------------------------------------------------------
 
@@ -628,7 +656,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `anggota`
 --
 ALTER TABLE `anggota`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `bahasa`
@@ -658,13 +686,13 @@ ALTER TABLE `jenis_karya`
 -- AUTO_INCREMENT for table `katalog`
 --
 ALTER TABLE `katalog`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `koleksi`
 --
 ALTER TABLE `koleksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `kunjungan`
@@ -682,7 +710,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pelanggaran`
 --
 ALTER TABLE `pelanggaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tamu`
@@ -694,7 +722,7 @@ ALTER TABLE `tamu`
 -- AUTO_INCREMENT for table `transaksi_koleksi`
 --
 ALTER TABLE `transaksi_koleksi`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`

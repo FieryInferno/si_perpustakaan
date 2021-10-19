@@ -105,7 +105,7 @@ class KatalogController extends Controller
       'edisi'           => Request()->edisi,
       'isbn'            => Request()->isbn,
       'id_jenis_karya'  => Request()->jenis_karya,
-      'id_bahasa'       => Request()->jenis_karya,
+      'id_bahasa'       => Request()->bahasa,
       'sampul_depan'    => $filename,
       'created_at'      => date("Y-m-d H:i:s")
     ];
