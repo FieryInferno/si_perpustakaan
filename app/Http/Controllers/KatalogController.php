@@ -8,14 +8,16 @@ use App\Models\EksemplarModel;
 use Illuminate\Http\Request;
 use App\Models\KatalogModel;
 use App\Models\ViewKoleksiModel;
+use App\Models\KoleksiModel;
 
 class KatalogController extends Controller
 {
   public function __construct()
   {
-    $this->KatalogModel = new KatalogModel();
-    $this->EksemplarModel = new EksemplarModel();
+    $this->KatalogModel     = new KatalogModel();
+    $this->EksemplarModel   = new EksemplarModel();
     $this->ViewKoleksiModel = new ViewKoleksiModel();
+    $this->koleksi          = new KoleksiModel();
   }
 
   public function index()
@@ -230,7 +232,7 @@ class KatalogController extends Controller
 
   public function destroy($id)
   {
-    $this->katalog->where('bib_id', $id)->delete();
+    $this->KatalogModel->where('bib_id', $id)->delete();
     $this->koleksi->where('bib_id', $id)->delete();
     return redirect('/katalog')->with('success', 'Data Berhasil dihapus');
   }
