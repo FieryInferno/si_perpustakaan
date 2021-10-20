@@ -8,40 +8,27 @@ use App\Models\HakAksesModel;
 
 class HakAksesController extends Controller
 {
-  /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
+  
   public function __construct()
   {
-      $this->middleware('auth');
-      // $this->HakAksesModel = new HakAksesModel();
+    $this->middleware('auth');
   }
-
-  /**
-   * Show the application dashboard.
-   *
-   * @return \Illuminate\Contracts\Support\Renderable
-   */
+  
   public function index()
   {
-      // View Hak Akses dan parsing data
+    $users = DB::table('users')->get();
 
-      $users = DB::table('users')->get();
-
-      return view('admin.v_hakAkses', ['users' => $users]);
+    return view('admin.v_hakAkses', ['users' => $users]);
   }
 
   public function detailUsers($id_users)
   {
-      # code...
-      $user = DB::table('users')->where('id', $id_users)->first();
+    $user = DB::table('users')->where('id', $id_users)->first();
   }
 
   public function tambahPengguna()
   {
-      return view('admin.v_entri-akses');
+    return view('admin.v_entri-akses');
   }
   
   public function editPengguna($id = null)
@@ -60,7 +47,7 @@ class HakAksesController extends Controller
         'name'        => Request()->name,
         'email'       => Request()->email,
         'is_admin'    => Request()->is_admin,
-        'created_at'  => now(),
+        'updated_at'  => date('Y-m-d h:i:s'),
       ];
 
       if (Request()->password !== null) {
@@ -93,7 +80,7 @@ class HakAksesController extends Controller
       'email'       => Request()->email,
       'is_admin'    => Request()->is_admin,
       'password'    => bcrypt(Request()->password),
-      'created_at'  => now(),
+      'created_at'  => date('Y-m-d h:i:s'),
     ];
     DB::table('users')->insert($data);
     return redirect()->route('admin-akses-pengguna')->with('status', 'Berhasil tambah pengguna');
@@ -125,7 +112,7 @@ class HakAksesController extends Controller
   //         'email' => Request()->email,
   //         'is_admin' => Request()->is_admin,
   //         'password' =>  bcrypt(Request()->password),
-  //         'created_at' => now(),
+  //         'created_at' => date('Y-m-d h:i:s'),
   //     ];
   //     dd($data);
   //     // $user->save($data);
